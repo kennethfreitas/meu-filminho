@@ -6,6 +6,7 @@
 - [Node.js](https://nodejs.org/en/download/)
 - [NVM - Unix](https://github.com/nvm-sh/nvm)
 - [NVM - Windows](https://github.com/coreybutler/nvm-windows)
+
 ** *NVM in nutshell, Node Version Manager, permite trocar diferentes versões do Node.js facilmente, para instalar uma versão use `nvm install 12` (instala o Node.js 12, por exemplo) e `nvm use 12` para utilizar a versão 12 baixada.*
 
 ---
