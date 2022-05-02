@@ -26,3 +26,36 @@ const gol = Object.create(car, {
 
 gol.honk();
 gol.accelerate();
+
+class Vehicle {
+  accelerate() {
+    console.log(`${this.model} vrummmmmm!`);
+  }
+}
+
+class Car extends Vehicle {
+  honk() {
+    console.log(`${this.model} beeeep!`);
+  }
+}
+
+class Gol extends Car {
+  constructor(model) {
+    super();
+    this.model = model;
+  }
+}
+
+const golzinho = new Gol('golzinho');
+
+golzinho.honk();
+golzinho.accelerate();
+
+const name = '   Kenneth motta Freitas  '
+  .trim()
+  .split(' ')
+  .map(n => `${n.charAt(0).toUpperCase()}${n.slice(1)}`)
+  .join(' ')
+  .replace('Motta', 'M.');
+
+console.log(name);
