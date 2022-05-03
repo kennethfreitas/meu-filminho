@@ -4,3 +4,4 @@ node_modules
 .editorconfig
 .prettierrc
 daily.md
+dist
