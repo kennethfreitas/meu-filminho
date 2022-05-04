@@ -5,3 +5,4 @@ node_modules
 .prettierrc
 daily.md
 dist
+db.json

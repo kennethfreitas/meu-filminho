@@ -1,17 +1,15 @@
 import express from 'express';
+import { moviesRoute } from './routes';
 
 const app = express();
+
+app.use(express.json());
 
 app.use((req, res, next) => {
   console.log(new Date(), req.url);
   next();
 });
 
-app.get('/cool', (req, res) => {
-  res.json({ nice: true });
-});
-
-// lição de casa
-// criar um endpoint /movies que retorna uma lista de filmes
+app.use('/api', moviesRoute);
 
 app.listen(666, () => console.log('Running'));
