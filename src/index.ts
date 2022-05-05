@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express from 'express';
 import { moviesRoute } from './routes';
 
@@ -12,4 +14,10 @@ app.use((req, res, next) => {
 
 app.use('/api', moviesRoute);
 
-app.listen(666, () => console.log('Running'));
+// @ts-ignore
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json(err);
+});
+
+app.listen(process.env.PORT!, () => console.log('Running'));
