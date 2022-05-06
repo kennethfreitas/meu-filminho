@@ -2,8 +2,6 @@ import path from 'path';
 import { readFile, writeFile } from 'fs/promises';
 import { Movie, MovieRepository } from '../interfaces';
 
-// lição de casa
-// Usar o MongoDb
 const DB_PATH = path.resolve(process.cwd(), 'db.json');
 
 class MovieJsonRepository implements MovieRepository {
@@ -43,4 +41,4 @@ class MovieJsonRepository implements MovieRepository {
   }
 }
 
-export const movieRepository = new MovieJsonRepository() as MovieRepository;
+export const movieJsonRepository = new MovieJsonRepository() as MovieRepository;

@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { randomUUID } from 'crypto';
+import { inject, injectable } from 'tsyringe';
+import { DI_REPOSITORY } from '../config';
 import { Movie } from '../interfaces';
-import { movieRepository } from '../repositories';
+import { movieJsonRepository, MovieMongoRepository } from '../repositories';
 
 type ID = string;
 
@@ -10,12 +12,16 @@ interface IdentifyReponse {
   Poster: string;
 }
 
-class MovieService {
-  private movieRepository = movieRepository;
+@injectable()
+export class MovieService {
+  // private movieRepository = movieJsonRepository;
+  // private movieRepository = movieMongoRepository;
   private request = axios.create({
     baseURL: 'https://www.omdbapi.com/',
     params: { apikey: process.env.OMDB_KEY! },
   });
+
+  constructor(@inject(DI_REPOSITORY) private movieRepository: MovieMongoRepository) {}
 
   async getMovies(): Promise<Movie[]> {
     return this.movieRepository.findMovies();
@@ -36,5 +42,3 @@ class MovieService {
     await this.movieRepository.updateMovie(id, { title: movieDetails.Title, poster: movieDetails.Poster });
   }
 }
-
-export const movieService = new MovieService();

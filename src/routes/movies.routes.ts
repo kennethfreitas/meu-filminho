@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import Joi from 'joi';
-import { movieService } from '../services';
+import { container } from 'tsyringe';
+import { MovieService } from '../services';
 import { catcher, requestValidator } from './middlewares';
 
 const router = Router();
+const movieService = container.resolve(MovieService);
 
 router
   .route('/movies')

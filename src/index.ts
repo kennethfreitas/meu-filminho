@@ -1,23 +1,18 @@
 import 'dotenv/config';
+import 'reflect-metadata';
+import { AppDataSource, containerInjection } from './config';
 
-import express from 'express';
-import { moviesRoute } from './routes';
+containerInjection();
 
-const app = express();
+// import mongoose from 'mongoose';
+import { server } from './app';
 
-app.use(express.json());
+async function bootstrap(): Promise<void> {
+  // await mongoose.connect(process.env.DATABASE_URI!);
+  await AppDataSource.initialize();
+  console.log('Database connected');
 
-app.use((req, res, next) => {
-  console.log(new Date(), req.url);
-  next();
-});
+  server.listen(process.env.PORT, () => console.log('Server running'));
+}
 
-app.use('/api', moviesRoute);
-
-// @ts-ignore
-app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode).json(err);
-});
-
-app.listen(process.env.PORT!, () => console.log('Running'));
+bootstrap();

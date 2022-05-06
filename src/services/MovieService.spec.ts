@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { Movie, MovieRepository } from '../interfaces';
-import { movieService } from './MovieService';
+import { MovieService } from './MovieService';
 
 const MovieRepositoryMock: MovieRepository = {
   findMovies: async (): Promise<Movie[]> => [
@@ -19,7 +19,7 @@ const RequestMock = {
 } as any as AxiosInstance;
 
 describe('MovieService Test Suite', () => {
-  movieService['movieRepository'] = MovieRepositoryMock;
+  const movieService = new MovieService(MovieRepositoryMock);
   movieService['request'] = RequestMock;
 
   afterEach(async () => jest.restoreAllMocks());
