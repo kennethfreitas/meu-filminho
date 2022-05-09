@@ -2,7 +2,7 @@ import axios from 'axios';
 import { randomUUID } from 'crypto';
 import { inject, injectable } from 'tsyringe';
 import { DI_REPOSITORY } from '../config';
-import { Movie } from '../interfaces';
+import { Movie, MovieRepository } from '../interfaces';
 import { movieJsonRepository, MovieMongoRepository } from '../repositories';
 
 type ID = string;
@@ -21,7 +21,7 @@ export class MovieService {
     params: { apikey: process.env.OMDB_KEY! },
   });
 
-  constructor(@inject(DI_REPOSITORY) private movieRepository: MovieMongoRepository) {}
+  constructor(@inject(DI_REPOSITORY) private movieRepository: MovieRepository) {}
 
   async getMovies(): Promise<Movie[]> {
     return this.movieRepository.findMovies();
